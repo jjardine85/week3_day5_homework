@@ -44,4 +44,17 @@ attr_accessor :name, :funds
     values = [@id]
     SqlRunner.run(sql, values)
   end
+# films the customer is going to see
+  def customer_plans
+    sql = "SELECT films.*
+FROM films
+INNER JOIN tickets
+ON films.id = tickets.film_id
+INNER JOIN customers
+ON tickets.customer_id = customers.id
+WHERE customer_id = $1"
+    values = [@id]
+    data = SqlRunner.run(sql, values)
+    data.map {|data| Film.new(data)}
+  end
 end

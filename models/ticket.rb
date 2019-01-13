@@ -58,4 +58,6 @@ attr_accessor :customer_id, :film_id
     customer = SqlRunner.run(sql, values).first
     return Customer.new(customer)
   end
+
+  
 end
